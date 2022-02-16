@@ -98,8 +98,6 @@ def determinant_calculator(n, matrix):
         return None
     elif n == 1:
         return matrix[0][0]
-    elif n == 2:
-        return matrix[0][0]*matrix[1][1]-matrix[0][1]*matrix[1][0]
     else:
         c_list = []
         multiplier = 1
