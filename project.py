@@ -113,7 +113,7 @@ def determinant_calculator(n, matrix):
                 new_matrix.append(row_list)
             new_matrix.pop(0)
             print(new_matrix)
-            c = multiplier * determinant_calculator(n-1, new_matrix)
+            c = multiplier * a * determinant_calculator(n-1, new_matrix)
             c_list.append(c)
             multiplier *= -1
         return sum(c_list)
