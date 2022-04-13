@@ -13,6 +13,12 @@ import matplotlib.colors as mcolors
 #text stuff
 
 """
+Things it can do right now:
+    2d vector grapher
+    determinant calculator (no plotting)
+    matrix-matrix and scalar-matrix matrix multiplication
+    
+
 Plan:
     simple 2d vector grapher
     determinant calculator for 2d and 3d matrices (should plot determinant for 2d matrices)
@@ -112,7 +118,50 @@ def determinant_calculator(n, matrix):
             multiplier *= -1
         return sum(c_list)
 
+def scalar_matrix_multiplication(c, m):
+    res = []
+    
+    for row in m:
+        lst = []
+        for val in row:
+            newval = c * val
+            lst.append(newval)
+        res.append(lst)
+    
+    return res
 
+def matrix_matrix_multiplication(m1, m2):
+    r1 = len(m1)
+    c1 = len(m1[0])
+    r2 = len(m2)
+    c2 = len(m2[0])
+    
+    if c1 != r2:
+        return None
+    
+    res = []
+    for i in range(r1):
+        lst = []
+        for j in range(c2):
+            lst.append(0)
+        res.append(lst)
+    
+    for i in range(r1):
+        for j in range(c2):
+            for k in range(r2):
+                res[i][j] += m1[i][k] * m2[k][j]
+    
+    return res
+    
+    
+print_matrix(matrix_matrix_multiplication([[12,7,3],
+                                           [4,5,6],
+                                           [7,8,9]], [[5,8,1,2],
+                                                      [6,7,3,0],
+                                                      [4,5,9,1]]))
+
+
+'''
 contin = True
 print('Welcome to the Linear Algebra Operations Calculator/Visualizer.')
 while(contin):
@@ -127,4 +176,5 @@ while(contin):
         print('Unknown Input, please try again.\n')
 
 print('\nHave a great day!')
+'''
     
