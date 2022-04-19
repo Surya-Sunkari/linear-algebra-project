@@ -18,7 +18,7 @@ Things it can do right now:
     determinant calculator (no plotting)
     matrix-matrix and scalar-matrix matrix multiplication
     calculate transpose of matrix
-    find the normal equation for douing linear regression
+    find the normal equation for doing linear regression
     
 Plan:
     simple 2d vector grapher
@@ -177,7 +177,7 @@ def lin_reg_normal_eq():
     for row in range(1, aRow+1):
         row_list = []
         for col in range(1, aCol+1):
-            row_list.append(int(input(f'Value at row {row}, col {col}: ')))
+            row_list.append(float(input(f'Value at row {row}, col {col}: ')))
         A.append(row_list)
         
     bSize = input('\nInput the number of rows of matrix B ("{rows}"): ')
@@ -187,7 +187,7 @@ def lin_reg_normal_eq():
     for row in range(1, bRow+1):
         row_list = []
         for col in range(1, bCol+1):
-            row_list.append(int(input(f'Value at row {row}, col {col}: ')))
+            row_list.append(float(input(f'Value at row {row}, col {col}: ')))
         B.append(row_list)
     
     ATA = matrix_matrix_multiplication(transpose_matrix(A), A)
