@@ -17,13 +17,14 @@ Things it can do right now:
     2d vector grapher
     determinant calculator (no plotting)
     matrix-matrix and scalar-matrix matrix multiplication
+    calculate transpose of matrix
+    find the normal equation for douing linear regression
     
-
 Plan:
     simple 2d vector grapher
     determinant calculator for 2d and 3d matrices (should plot determinant for 2d matrices)
     transformation calculator and viewer for 2d matrices
-    matrix multiplication calculator ? (could be standalone)
+    inverse calculator
 """
 
 def get_vectors_2d():
@@ -153,12 +154,60 @@ def matrix_matrix_multiplication(m1, m2):
     
     return res
     
+def transpose_matrix(m):
+    rows = len(m)
+    cols = len(m[0])
+    
+    res = []
+    for i in range(cols):
+        lst = []
+        for j in range(rows):
+            lst.append(m[j][i])
+        res.append(lst)
+    
+    return res
+    
+
+def lin_reg_normal_eq():
+    aSize = input('\nInput the size of matrix A ("{rows} {cols}"): ')
+    aRow = int(aSize.split()[0])
+    aCol = int(aSize.split()[1])
+    A = []
+    for row in range(1, aRow+1):
+        row_list = []
+        for col in range(1, aCol+1):
+            row_list.append(int(input(f'Value at row {row}, col {col}: ')))
+        A.append(row_list)
+        
+    bSize = input('\nInput the number of rows of matrix B ("{rows}"): ')
+    bRow = int(bSize.split()[0])
+    bCol = 1
+    B = []
+    for row in range(1, bRow+1):
+        row_list = []
+        for col in range(1, bCol+1):
+            row_list.append(int(input(f'Value at row {row}, col {col}: ')))
+        B.append(row_list)
+    
+    ATA = matrix_matrix_multiplication(transpose_matrix(A), A)
+    ATb = matrix_matrix_multiplication(transpose_matrix(A), B)
+    
+    print('The matrix ATA is:')
+    print_matrix(ATA)
+    print('\nThe matrix ATb is:')
+    print_matrix(ATb)
     
 print_matrix(matrix_matrix_multiplication([[12,7,3],
                                            [4,5,6],
                                            [7,8,9]], [[5,8,1,2],
                                                       [6,7,3,0],
                                                       [4,5,9,1]]))
+                                                      
+print_matrix(transpose_matrix([[12,7,3],
+                               [4,5,6],
+                               [7,8,9]]))
+print()
+lin_reg_normal_eq()
 
 
 '''
