@@ -25,6 +25,7 @@ Plan:
     determinant calculator for 2d and 3d matrices (should plot determinant for 2d matrices)
     transformation calculator and viewer for 2d matrices
     inverse calculator
+    matrix multiplication from console instead of code
 """
 
 def get_vectors_2d():
