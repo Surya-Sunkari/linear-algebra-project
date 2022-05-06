@@ -9,8 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
-#https://matplotlib.org/stable/gallery/text_labels_and_annotations/text_fontdict.html#sphx-glr-gallery-text-labels-and-annotations-text-fontdict-py
-#text stuff
 
 """
 Things it can do right now:
@@ -20,12 +18,13 @@ Things it can do right now:
     calculate transpose of matrix
     find the normal equation for doing linear regression
     
-Plan:
+Additions?:
     simple 2d vector grapher
     determinant calculator for 2d and 3d matrices (should plot determinant for 2d matrices)
     transformation calculator and viewer for 2d matrices
-    inverse calculator
-    matrix multiplication from console instead of code
+    inverse calculator (!!!)
+    calculate lin reg using inverses
+    calculate lin reg into fractions instead of decimal
 """
 
 def get_vectors_2d():
@@ -154,6 +153,40 @@ def matrix_matrix_multiplication(m1, m2):
                 res[i][j] += m1[i][k] * m2[k][j]
     
     return res
+
+def matrix_multiplication_from_console():
+    aSize = input('\nInput the size of matrix A ("{rows} {cols}"): ')
+    aRow = int(aSize.split()[0])
+    aCol = int(aSize.split()[1])
+    A = []
+    for row in range(1, aRow+1):
+        row_list = []
+        for col in range(1, aCol+1):
+            row_list.append(float(input(f'Value at row {row}, col {col}: ')))
+        A.append(row_list)
+        
+    bSize = input('\nInput the size of matrix B ("{rows} {cols}"): ')
+    bRow = int(bSize.split()[0])
+    bCol = int(bSize.split()[1])
+    
+    if(aCol != bRow):
+        print('\nINVALID MATRIX SIZE, PLEASE TRY AGAIN')
+        return None
+        
+    B = []
+    for row in range(1, bRow+1):
+        row_list = []
+        for col in range(1, bCol+1):
+            row_list.append(float(input(f'Value at row {row}, col {col}: ')))
+        B.append(row_list)
+    
+    res = matrix_matrix_multiplication(A, B)
+    
+    print_matrix(A)
+    print('\nmultiplied by\n\n')
+    print_matrix(B)
+    print('nis:\n\n')
+    print_matrix(res())
     
 def transpose_matrix(m):
     rows = len(m)
@@ -180,10 +213,10 @@ def lin_reg_normal_eq():
             row_list.append(float(input(f'Value at row {row}, col {col}: ')))
         A.append(row_list)
         
-    bSize = input('\nInput the number of rows of matrix B ("{rows}"): ')
-    bRow = int(bSize.split()[0])
+    bRow = aRow
     bCol = 1
     B = []
+    print("\nNow input the values for matrix B:  ")
     for row in range(1, bRow+1):
         row_list = []
         for col in range(1, bCol+1):
@@ -193,38 +226,29 @@ def lin_reg_normal_eq():
     ATA = matrix_matrix_multiplication(transpose_matrix(A), A)
     ATb = matrix_matrix_multiplication(transpose_matrix(A), B)
     
-    print('The matrix ATA is:')
+    print('\n\nThe matrix ATA is:')
     print_matrix(ATA)
     print('\nThe matrix ATb is:')
     print_matrix(ATb)
-    
-print_matrix(matrix_matrix_multiplication([[12,7,3],
-                                           [4,5,6],
-                                           [7,8,9]], [[5,8,1,2],
-                                                      [6,7,3,0],
-                                                      [4,5,9,1]]))
-                                                      
-print_matrix(transpose_matrix([[12,7,3],
-                               [4,5,6],
-                               [7,8,9]]))
-print()
-lin_reg_normal_eq()
 
 
-'''
+
 contin = True
 print('Welcome to the Linear Algebra Operations Calculator/Visualizer.')
 while(contin):
-    kb = input('\nWhat would you like to do? (enter the letter):\n\na) graph 2d vectors\nb) calculate determinant\nc) exit program\n\n')
+    kb = input('\n\nWhat would you like to do? (enter the letter):\n\na) graph 2d vectors\nb) calculate determinant\nc) multiply matrices\nd) calculate linear regression equations\ne) exit program\n\n')
     if kb == 'a':
         vector_grapher_2d()
     elif kb == 'b':
         determinant_value_inputer()
     elif kb == 'c':
+        matrix_multiplication_from_console()
+    elif kb == 'd':
+        lin_reg_normal_eq()
+    elif kb == 'e':
         contin = False
     else:
         print('Unknown Input, please try again.\n')
 
 print('\nHave a great day!')
-'''
-    
+
